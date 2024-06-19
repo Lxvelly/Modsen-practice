@@ -1,0 +1,14 @@
+.Body {
+	&__books{
+		display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			justify-content: center;
+		&__item{ 
+			width: 30%;
+			background-color: rgb(224, 224, 224);
+			margin: 5px;
+			padding: 5px;
+		}
+	}
+}

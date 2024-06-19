@@ -1,11 +1,10 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
+import { key } from '../../assets/apiKey'
 import styles from './styles.module.scss'
 
 export const Body = () => {
-  const key = 'AIzaSyDcH3ab8575hvkzDCJbrei1UaaiO2HsCCY'
-
   const [data, setData] = useState<any[]>([])
   const [loaded, setLoaded] = useState<boolean>(false)
 
@@ -26,9 +25,15 @@ export const Body = () => {
   }, [])
 
   return (
-    <div>
+    <div className={styles.Body}>
       {loaded ? (
-        <div> {data.map((e) => e.accessInfo.country)} </div>
+        <div className={styles.Body__books}>
+          {data.map((e) => (
+            <div key={e.id} className={styles.Body__books__item}>
+              {e.volumeInfo.title}
+            </div>
+          ))}{' '}
+        </div>
       ) : (
         <p>Loading...</p>
       )}
