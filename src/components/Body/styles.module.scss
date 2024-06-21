@@ -1,14 +1,61 @@
 .Body {
+	&__text{
+		font-family: "Montserrat", sans-serif;
+		font-weight: 700;
+		font-size: 20px;
+		text-align: center;
+		margin: 20px;
+	}
+	
 	&__books{
 		display: flex;
-			flex-direction: row;
-			flex-wrap: wrap;
-			justify-content: center;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-around;
+		
 		&__item{ 
-			width: 30%;
+			width: 20%;
 			background-color: rgb(224, 224, 224);
-			margin: 5px;
+			margin: 25px;
 			padding: 5px;
+			border-radius: 10px;
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-end;
+			
+			&__img{
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+				width: 150px;
+				object-fit: cover;
+				filter: drop-shadow(5px 5px 10px #000000);
+				margin-bottom: 20px;
+				margin-top: auto;
+			}
+
+			&__link{
+				margin: 5px;
+				font-family: "Montserrat", sans-serif;
+				font-weight: 500;
+				font-size: 14px;
+				color:gray;
+			}
+
+			&__name{
+				margin: 5px;
+				font-family: "Montserrat", sans-serif;
+				font-weight: 700;
+				font-size: 18px;
+			}
+			
+			&__authors{
+				margin: 5px;
+				font-family: "Montserrat", sans-serif;
+				font-weight: 500;
+				font-size: 14px;
+				color: gray;
+			}
 		}
 	}
 }
