@@ -54,7 +54,9 @@ export const Body = () => {
           </div>
         </>
       ) : (
-        <p>Loading...</p>
+        <div className={styles.Loading}>
+          <div className={styles.Loading__pic} />
+        </div>
       )}
     </div>
   )
