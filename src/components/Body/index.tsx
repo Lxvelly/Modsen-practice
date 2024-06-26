@@ -19,8 +19,10 @@ export const Body = () => {
 
   const handleButtonClick = (e: any) => {
     e.preventDefault()
+    if (storedValue != inputValue) {
+      setLoaded(false)
+    }
     setStoredValue(inputValue)
-    setLoaded(false)
   }
 
   const handleCategoryChange = (e: any) => {
