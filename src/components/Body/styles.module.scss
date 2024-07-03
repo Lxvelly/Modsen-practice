@@ -23,6 +23,12 @@
 			flex-direction: column;
 			justify-content: flex-end;
 			
+			&__btn{ 
+				border: none;
+				cursor: pointer;
+				background: transparent;
+			}
+
 			&__img{
 				display: block;
 				margin-left: auto;

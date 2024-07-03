@@ -1,0 +1,22 @@
+.Card{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	&__img{
+		width: 50%;
+		padding: 20px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	
+	&__text{
+		width: 50%;
+		padding: 20px;
+
+		&__description{
+			border: 1px solid grey
+		}
+	}
+}

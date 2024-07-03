@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
 import { key } from '../../assets/apiKey'
+import { BookCard } from '../BookCard'
 import styles from './styles.module.scss'
 
 export const Body = () => {
@@ -12,12 +13,17 @@ export const Body = () => {
   const [storedValue, setStoredValue] = useState('')
   const [category, setCategory] = useState('')
   const [sort, setSort] = useState('relevance')
+  const [index, setIndex] = useState(0)
+  const [isSelected, setIsSelected] = useState(false)
+  const [selectedId, setSelectedId] = useState('')
 
   const handleInputChange = (event: any) => {
+    // Не знаю как типизировать правильно, по идеи string надо, но .target с string не  работает
     setInputValue(event.target.value)
   }
 
   const handleButtonClick = (e: any) => {
+    // Не знаю как типизировать правильно, по идеи string надо, но e.preventDefault() с string не  работает
     e.preventDefault()
     if (storedValue != inputValue) {
       setLoaded(false)
@@ -25,12 +31,12 @@ export const Body = () => {
     setStoredValue(inputValue)
   }
 
-  const handleCategoryChange = (e: any) => {
+  const handleCategoryChange = (e: string) => {
     setCategory(e)
     setLoaded(false)
   }
 
-  const handleSortingChange = (e: any) => {
+  const handleSortingChange = (e: string) => {
     setSort(e)
     setLoaded(false)
   }
@@ -38,7 +44,7 @@ export const Body = () => {
   useEffect(() => {
     const fetchData = async () => {
       const resp = await axios.get(
-        `https://www.googleapis.com/books/v1/volumes?q="${storedValue}"+subject:"${category}"&orderBy=${sort}&maxResults=30&key=${key}`,
+        `https://www.googleapis.com/books/v1/volumes?q="${storedValue}"+subject:"${category}"&orderBy=${sort}&maxResults=30&startIndex=${index}&key=${key}`,
       )
       const books = resp.data.items || []
       const totalItemsCount = resp.data.totalItems
@@ -48,7 +54,7 @@ export const Body = () => {
     }
 
     fetchData()
-  }, [storedValue, category, sort])
+  }, [storedValue, category, sort, index])
 
   return (
     <nav>
@@ -118,34 +124,52 @@ export const Body = () => {
       </div>
       <div className={styles.Body}>
         {loaded ? (
-          <>
-            <p className={styles.Body__text}>Found {totalItems} results</p>
-            <div className={styles.Body__books}>
-              {data.map((e) => (
-                <div key={e.id} className={styles.Body__books__item}>
-                  {e.volumeInfo.imageLinks &&
-                    e.volumeInfo.imageLinks.thumbnail && (
-                      <img
-                        src={e.volumeInfo.imageLinks.thumbnail}
-                        alt="Thumbnail"
-                        className={styles.Body__books__item__img}
-                      />
-                    )}
-                  <div className={styles.Body__books__item__link}>
-                    <a href="/">{e.volumeInfo.categories || 'No Category'}</a>
+          isSelected ? (
+            <BookCard id={selectedId} />
+          ) : (
+            <>
+              <p className={styles.Body__text}>Found {totalItems} results</p>
+              <div className={styles.Body__books}>
+                {data.map((e) => (
+                  <div key={e.id} className={styles.Body__books__item}>
+                    <button
+                      className={styles.Body__books__item__btn}
+                      onClick={() => (
+                        setSelectedId(e.id), setIsSelected(true)
+                      )}>
+                      {e.volumeInfo.imageLinks &&
+                        e.volumeInfo.imageLinks.thumbnail && (
+                          <img
+                            src={e.volumeInfo.imageLinks.thumbnail}
+                            alt="Thumbnail"
+                            className={styles.Body__books__item__img}
+                          />
+                        )}
+                      <div className={styles.Body__books__item__link}>
+                        <a href="/">
+                          {e.volumeInfo.categories || 'No Category'}
+                        </a>
+                      </div>
+                      <div className={styles.Body__books__item__name}>
+                        {e.volumeInfo.title || 'No Title'}
+                      </div>
+                      <div className={styles.Body__books__item__authors}>
+                        {e.volumeInfo.authors
+                          ? e.volumeInfo.authors.join(', ')
+                          : 'No Authors'}
+                      </div>
+                    </button>
                   </div>
-                  <div className={styles.Body__books__item__name}>
-                    {e.volumeInfo.title || 'No Title'}
-                  </div>
-                  <div className={styles.Body__books__item__authors}>
-                    {e.volumeInfo.authors
-                      ? e.volumeInfo.authors.join(', ')
-                      : 'No Authors'}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </>
+                ))}
+              </div>
+              <button // TODO: styles for button
+                onClick={() => {
+                  setIndex(index + 30)
+                }}>
+                load more
+              </button> 
+            </>
+          )
         ) : (
           <div className={styles.Loading}>
             <div className={styles.Loading__pic} />
