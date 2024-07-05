@@ -33,8 +33,10 @@ export const BookCard = (props: PropsWithChildren<BookInfo>) => {
           <div className={styles.Card__text}>
             <p>{data.volumeInfo.categories}</p>
             <h1>{data.volumeInfo.title}</h1>
-            <p>{data.volumeInfo.authors}</p>
-            <div className={styles.Card__text__description}>{data.volumeInfo.description}</div>
+            <p>{data.volumeInfo.authors.join(', ')}</p>
+            <div className={styles.Card__text__description}>
+              {data.volumeInfo.description}
+            </div>
           </div>
         </div>
       ) : (

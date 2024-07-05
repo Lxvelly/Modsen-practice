@@ -29,6 +29,7 @@ export const Body = () => {
       setLoaded(false)
     }
     setStoredValue(inputValue)
+    setIsSelected(false)
   }
 
   const handleCategoryChange = (e: string) => {
@@ -162,12 +163,15 @@ export const Body = () => {
                   </div>
                 ))}
               </div>
-              <button // TODO: styles for button
-                onClick={() => {
-                  setIndex(index + 30)
-                }}>
-                load more
-              </button> 
+              <div className={styles.Body__moreBtn}>
+                <button
+                  className={styles.Body__moreBtn__btn}
+                  onClick={() => {
+                    setIndex(index + 30)
+                  }}>
+                  Load more
+                </button>
+              </div>
             </>
           )
         ) : (

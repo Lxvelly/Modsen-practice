@@ -7,6 +7,20 @@
 		margin: 20px;
 	}
 	
+	&__moreBtn{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		
+		&__btn{
+				font-family: "Montserrat", sans-serif;
+				font-weight: 700;
+				font-size: 24px;
+				text-align: center;
+				margin: 20px;
+		}
+	}
+
 	&__books{
 		display: flex;
 		flex-direction: row;
