@@ -42,6 +42,10 @@ export const Body = () => {
     setLoaded(false)
   }
 
+  const handleBackClick = () => {
+    setIsSelected(false)
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       const resp = await axios.get(
@@ -126,7 +130,14 @@ export const Body = () => {
       <div className={styles.Body}>
         {loaded ? (
           isSelected ? (
-            <BookCard id={selectedId} />
+            <>
+              <button
+                className={styles.Body__backBtn}
+                onClick={() => handleBackClick()}>
+                Back
+              </button>
+              <BookCard id={selectedId} />
+            </>
           ) : (
             <>
               <p className={styles.Body__text}>Found {totalItems} results</p>
