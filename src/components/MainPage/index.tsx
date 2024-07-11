@@ -3,9 +3,10 @@ import React, { useEffect, useState } from 'react'
 
 import { key } from '../../assets/apiKey'
 import { BookCard } from '../BookCard'
+import { FavoritesPage } from '../FavoritesPage'
 import styles from './styles.module.scss'
 
-export const Body = () => {
+export const MainPage = () => {
   const [data, setData] = useState<any[]>([])
   const [loaded, setLoaded] = useState<boolean>(false)
   const [totalItems, setTotalItems] = useState(0)
@@ -16,6 +17,8 @@ export const Body = () => {
   const [index, setIndex] = useState(0)
   const [isSelected, setIsSelected] = useState(false)
   const [selectedId, setSelectedId] = useState('')
+  const [favorites, setFavorites] = useState<any[]>([])
+  const [isSelectedFavorite, setIsSelectedFavorite] = useState(false)
 
   const handleInputChange = (event: any) => {
     // Не знаю как типизировать правильно, по идеи string надо, но .target с string не  работает
@@ -40,6 +43,28 @@ export const Body = () => {
   const handleSortingChange = (e: string) => {
     setSort(e)
     setLoaded(false)
+  }
+
+  const handleBackClick = () => {
+    setIsSelected(false)
+  }
+
+  const handleFavClick = (
+    id: any,
+    img: any,
+    category: any,
+    title: any,
+    author: any,
+  ) => {
+    const info = {
+      id: id,
+      img: img,
+      category: category,
+      title: title,
+      author: author,
+    }
+
+    setFavorites([...favorites, info])
   }
 
   useEffect(() => {
@@ -79,6 +104,11 @@ export const Body = () => {
             />
           </button>
         </form>
+        <div>
+          <button onClick={() => setIsSelectedFavorite(true)}>
+            Show favorites
+          </button>
+        </div>
         <div className={styles.Header__selectors}>
           Categories
           <select
@@ -126,13 +156,39 @@ export const Body = () => {
       <div className={styles.Body}>
         {loaded ? (
           isSelected ? (
-            <BookCard id={selectedId} />
+            <>
+              <button
+                className={styles.Body__backBtn}
+                onClick={() => handleBackClick()}>
+                Back
+              </button>
+              <BookCard id={selectedId} />
+            </>
+          ) : isSelectedFavorite ? (
+            <FavoritesPage favArr={favorites} />
           ) : (
             <>
               <p className={styles.Body__text}>Found {totalItems} results</p>
               <div className={styles.Body__books}>
                 {data.map((e) => (
                   <div key={e.id} className={styles.Body__books__item}>
+                    <button
+                      className={styles.Body__books__item__fav}
+                      onClick={() =>
+                        handleFavClick(
+                          e.id,
+                          e.volumeInfo.imageLinks.thumbnail,
+                          e.volumeInfo.categories,
+                          e.volumeInfo.title,
+                          e.volumeInfo.authors,
+                        )
+                      }>
+                      <img
+                        src="./src/assets/favicon.png"
+                        alt="fav"
+                        width={30}
+                        height={30}></img>
+                    </button>
                     <button
                       className={styles.Body__books__item__btn}
                       onClick={() => (
@@ -167,7 +223,9 @@ export const Body = () => {
                 <button
                   className={styles.Body__moreBtn__btn}
                   onClick={() => {
-                    setIndex(index + 30)
+                    setIndex(index + 30),
+                      window.scrollTo(0, 0),
+                      setLoaded(false)
                   }}>
                   Load more
                 </button>

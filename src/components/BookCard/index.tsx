@@ -39,9 +39,7 @@ export const BookCard = (props: PropsWithChildren<BookInfo>) => {
             </div>
           </div>
         </div>
-      ) : (
-        <></>
-      )}
+      ) : null}
     </div>
   )
 }

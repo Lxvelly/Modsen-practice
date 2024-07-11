@@ -3,11 +3,11 @@ import './index.css'
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import { Body } from './components/Body'
+import { MainPage } from './components/MainPage'
 
 ReactDOM.render(
   <React.StrictMode>
-    <Body />
+    <MainPage />
   </React.StrictMode>,
   document.getElementById('root'),
 )

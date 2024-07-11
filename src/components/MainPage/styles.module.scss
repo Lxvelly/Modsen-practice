@@ -1,33 +1,47 @@
 .Body {
-	&__text{
+	&__text {
 		font-family: "Montserrat", sans-serif;
 		font-weight: 700;
 		font-size: 20px;
 		text-align: center;
 		margin: 20px;
 	}
-	
-	&__moreBtn{
+
+	&__backBtn {
+		background: transparent;
+		border: none;
+		cursor: pointer;
+		margin-top: 5px;
+		margin-bottom: 5px;
+		margin-left: 25px;
+		font-family: "Montserrat", sans-serif;
+		font-weight: 300;
+		text-align: center;
+		font-size: 24px;
+	}
+
+	&__moreBtn {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		
-		&__btn{
-				font-family: "Montserrat", sans-serif;
-				font-weight: 700;
-				font-size: 24px;
-				text-align: center;
-				margin: 20px;
+
+		&__btn {
+			font-family: "Montserrat", sans-serif;
+			font-weight: 700;
+			font-size: 24px;
+			text-align: center;
+			margin: 20px;
 		}
 	}
 
-	&__books{
+	&__books {
 		display: flex;
 		flex-direction: row;
 		flex-wrap: wrap;
 		justify-content: space-around;
-		
-		&__item{ 
+
+		&__item {
+			min-width: 150px;
 			width: 20%;
 			background-color: rgb(224, 224, 224);
 			margin: 25px;
@@ -36,40 +50,49 @@
 			display: flex;
 			flex-direction: column;
 			justify-content: flex-end;
-			
-			&__btn{ 
+			word-wrap: break-word;
+
+			&__fav{
+				background: transparent;
+				border: none;
+				cursor: pointer;
+				display: flex;
+			}
+
+			&__btn {
 				border: none;
 				cursor: pointer;
 				background: transparent;
 			}
 
-			&__img{
+			&__img {
 				display: block;
 				margin-left: auto;
 				margin-right: auto;
-				width: 150px;
+				width: 100%;
+				max-width: 150px;
 				object-fit: cover;
 				filter: drop-shadow(5px 5px 10px #000000);
 				margin-bottom: 20px;
 				margin-top: auto;
 			}
 
-			&__link{
+			&__link {
 				margin: 5px;
 				font-family: "Montserrat", sans-serif;
 				font-weight: 500;
 				font-size: 14px;
-				color:gray;
+				color: gray;
 			}
 
-			&__name{
+			&__name {
 				margin: 5px;
 				font-family: "Montserrat", sans-serif;
 				font-weight: 700;
 				font-size: 18px;
 			}
-			
-			&__authors{
+
+			&__authors {
 				margin: 5px;
 				font-family: "Montserrat", sans-serif;
 				font-weight: 500;
@@ -80,29 +103,29 @@
 	}
 }
 
-.Loading{
+.Loading {
 	cursor: wait;
 	margin: 0 auto;
 	display: flex;
 	flex-direction: column;
 	height: 100vh;
 	justify-content: center;
-	align-items: center;	
+	align-items: center;
 
-		&__pic {
-			width: 50px;
-			aspect-ratio: 1;
-			border-radius: 50%;
-			border: 8px solid lightblue;
-			border-right-color: orange;
-			animation: l2 1s infinite linear;
+	&__pic {
+		width: 50px;
+		aspect-ratio: 1;
+		border-radius: 50%;
+		border: 8px solid lightblue;
+		border-right-color: orange;
+		animation: l2 1s infinite linear;
+	}
+
+	@keyframes l2 {
+		to {
+			transform: rotate(1turn)
 		}
-			
-		@keyframes l2 {
-			to {
-				transform: rotate(1turn)
-			}
-		}
+	}
 }
 
 .Header {
@@ -126,13 +149,14 @@
 		margin-bottom: 20px;
 	}
 
-	&__selectors{
+	&__selectors {
 		font-family: "Montserrat", sans-serif;
 		font-weight: 500;
 		font-size: 24px;
 		color: white;
 		margin-top: 20px;
-		&__selector{
+
+		&__selector {
 			outline: none;
 			font-family: "Montserrat", sans-serif;
 			font-weight: 500;

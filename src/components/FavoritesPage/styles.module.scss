@@ -1,0 +1,57 @@
+
+
+.books {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+
+	&__item {
+		min-width: 150px;
+		width: 20%;
+		background-color: rgb(224, 224, 224);
+		margin: 25px;
+		padding: 5px;
+		border-radius: 10px;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		word-wrap: break-word;
+
+
+		&__img {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+			width: 100%;
+			max-width: 150px;
+			object-fit: cover;
+			filter: drop-shadow(5px 5px 10px #000000);
+			margin-bottom: 20px;
+			margin-top: auto;
+		}
+
+		&__link {
+			margin: 5px;
+			font-family: "Montserrat", sans-serif;
+			font-weight: 500;
+			font-size: 14px;
+			color: gray;
+		}
+
+		&__name {
+			margin: 5px;
+			font-family: "Montserrat", sans-serif;
+			font-weight: 700;
+			font-size: 18px;
+		}
+
+		&__authors {
+			margin: 5px;
+			font-family: "Montserrat", sans-serif;
+			font-weight: 500;
+			font-size: 14px;
+			color: gray;
+		}
+	}
+}
