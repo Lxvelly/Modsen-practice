@@ -63,7 +63,6 @@ export const MainPage = () => {
       title: title,
       author: author,
     }
-
     setFavorites([...favorites, info])
   }
 
@@ -157,6 +156,12 @@ export const MainPage = () => {
         {loaded ? (
           isSelected ? (
             <>
+              <button
+                className={styles.Body__backBtn}
+                onClick={() => handleBackClick()}>
+                Back
+              </button>
+
               <button
                 className={styles.Body__backBtn}
                 onClick={() => handleBackClick()}>
