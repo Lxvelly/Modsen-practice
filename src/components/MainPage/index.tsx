@@ -188,11 +188,15 @@ export const MainPage = () => {
                           e.volumeInfo.authors,
                         )
                       }>
-                      <img
+                      {
+                        <p> Add to favorites</p>
+                        // No work on deploy =(
+                        /* <img 
                         src="./src/assets/favicon.png"
                         alt="fav"
                         width={30}
-                        height={30}></img>
+                        height={30}></img> */
+                      }
                     </button>
                     <button
                       className={styles.Body__books__item__btn}
